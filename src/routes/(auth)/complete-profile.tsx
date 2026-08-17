@@ -1,4 +1,4 @@
-import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { Vstack } from "@/components/layout/Vstack.tsx";
 import { Container } from "@/components/layout/Container.tsx";
 import { Field, Form, Radio, RadioGroup, Select } from "@base-ui/react";
@@ -19,7 +19,7 @@ import { queryClient } from "@/lib/queryClient.ts";
 import { toast } from "sonner";
 import { useEffect } from "react";
 import { getProfile } from "@/api/services/get-profile.ts";
-import { encryptionUtils } from "@/lib/encryption.ts";
+import { hardNavigateToAppPath, resolvePostAuthPath } from "@/lib/auth-redirect.ts";
 import { z } from "zod";
 import { useTranslation } from "react-i18next";
 import { getAppLanguage } from "@/lib/getAppLanguage.ts";
@@ -43,16 +43,14 @@ export const Route = createFileRoute("/(auth)/complete-profile")({
       queryFn: getProfile,
     });
 
-    const isProfileComplete =
-      data?.qualification && data?.age && data?.gender && data?.name;
+    const user = data?.user ?? data;
+    const isProfileComplete = Boolean(user?.age && user?.gender && user?.name);
 
-    const redirectPath = search?.redirect;
-
-    const decryptedRedirect = encryptionUtils.decrypt(redirectPath as string);
+    const targetPath = resolvePostAuthPath(search?.redirect, "/dashboard");
 
     if (isProfileComplete) {
       throw redirect({
-        to: decryptedRedirect,
+        to: targetPath,
       });
     }
   },
@@ -77,7 +75,6 @@ const qualificationOptions = [
 ];
 
 function RouteComponent() {
-  const router = useRouter();
   const updateProfileMutation = useUpdateProfileMutation();
 
   const search = Route.useSearch();
@@ -102,9 +99,7 @@ function RouteComponent() {
     },
   ];
 
-  const redirectPath = search?.redirect;
-
-  const decryptedPathname = encryptionUtils.decrypt(redirectPath as string);
+  const targetPath = resolvePostAuthPath(search?.redirect, "/dashboard");
 
   const { data: buttonData } = useQuery({
     queryKey: ["button_page", i18n.language],
@@ -151,7 +146,7 @@ function RouteComponent() {
           await queryClient.invalidateQueries({ queryKey: ["profile"] });
           await queryClient.refetchQueries({ queryKey: ["profile"] });
           form.reset();
-          await router.navigate({ to: decryptedPathname || "/dashboard" });
+          hardNavigateToAppPath(targetPath);
           toast.success("Profile updated successfully");
         },
         onError: () => {

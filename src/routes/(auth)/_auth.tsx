@@ -1,6 +1,7 @@
 import { createFileRoute, redirect, isRedirect } from "@tanstack/react-router";
 import { getProfile } from "@/api/services/get-profile.ts";
 import { queryClient } from "@/lib/queryClient.ts";
+import { resolvePostAuthPath } from "@/lib/auth-redirect.ts";
 
 const SIGN_IN_PATH = "/sign-in";
 const DASHBOARD_PATH = "/dashboard";
@@ -28,7 +29,10 @@ export const Route = createFileRoute("/(auth)/_auth")({
 			if (pathname === SIGN_IN_PATH && isGuest) return;
 
 			if (!isGuest) {
-				throw redirect({ to: DASHBOARD_PATH });
+				const search = location.search as { redirect?: string };
+				throw redirect({
+					to: resolvePostAuthPath(search?.redirect, DASHBOARD_PATH),
+				});
 			}
 
 		} catch (error) {
