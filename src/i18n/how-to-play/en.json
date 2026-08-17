@@ -1,0 +1,44 @@
+
+
+{
+    "title": "How to Play!",
+    "backTitle": "Back to Menu",
+    "button":"Get Started",
+    "start": {
+        "step": "Step 1",
+        "title": "Start Swiping",
+        "desc": "Tap on Start Swiping to begin the game"
+    },
+    "swipes": [
+        {
+            "id":1,
+            "step": "Step 2",
+            "title": "Swipe Right",
+           "asset": "swipe-right",
+            "desc": "Like what you see? Swipe right to select preferences",
+            "type": "Like"
+        },
+        {
+            "id":2,
+            "step": "Step 3",
+            "title": "Swipe Left",
+            "asset": "swipe-left",
+            "desc": "Not your thing? Swipe left to skip",
+            "type": "Dislike"
+        }
+    ],
+    "winning": {
+        "step": "Step 4",
+        "title": "What you’ll get",
+        "list": [
+            "Personalized degree match",
+            "Top university options",
+            "Career-focused recommendations"
+        ],
+        "strategyCard": {
+            "primaryTitle": "You Are",
+            "SecondaryTitle": "The Stategist",
+            "desc": "You think ahead, analyze deeply and make smart decisions."
+        }
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "gameplay": {
+        "like": "Like",
+        "dislike": "Dislike"
+    },
+    "insight": {
+        "label": "Insight",
+        "view": "View Insight"
+    },
+    "play":"play Again",
+    "result":{
+        "save":"Save results",
+        "remove":"Remove results"
+    },
+    "share":{
+        "label":"Share",
+        "friend":"Share with your friends"
+    },
+    "explore" :{
+        "university":"Explore University"
+    }
+}

@@ -1,0 +1,294 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Tiro+Devanagari+Hindi:ital@0;1&family=Unbounded:wght@200..900&display=swap");
+
+@import "tailwindcss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body {
+  scrollbar-gutter: stable;
+  background-color: #000000;
+}
+
+@theme {
+  /* fonts  */
+  --font-unbounded: "Unbounded", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-instrument: "Instrument Sans", sans-serif;
+  --font-devnagari: "Tiro Devanagari Hindi", sans-serif;
+
+  --color-button-primary: #f0f0f0;
+  --color-button-secondary: #a3a3a3;
+
+  /* Text */
+  --color-text-primary: #ffffff;
+  --color-primary-70: #ffffffb2;
+  /*--color-text-secondary: #DEDB00;*/
+
+  --color-background-primary: #000000;
+
+  --color-primary: #f0f0f0;
+  --color-secondary: #dedb00;
+}
+
+@layer components {
+  .h1 {
+    @apply font-[Unbounded] text-[24px] lg:text-[40px] leading-8 lg:leading-12 font-normal text-white;
+  }
+  .h2 {
+    @apply font-[Unbounded] text-[20px] lg:text-[32px] leading-8 lg:leading-10.5 font-normal text-white;
+  }
+  .h2-light {
+    @apply font-[Unbounded] text-[16px] lg:text-[32px] leading-8 lg:leading-10.5 font-normal text-white;
+  }
+  .h2-md {
+    @apply font-[Unbounded] text-[20px]  leading-8  font-normal text-white;
+  }
+  .h3 {
+    @apply font-[Unbounded] text-[16px] lg:text-[24px] leading-8 lg:leading-9 font-normal text-white;
+  }
+  .h3-md {
+    @apply font-[Unbounded] text-[16px] leading-8  font-normal;
+  }
+  .p-medium {
+    @apply font-[montserrat] text-[16px] lg:text-[20px] leading-5.5 lg:leading-8 font-light;
+  }
+  .p-medium-2 {
+    @apply font-[montserrat] text-[14px] lg:text-[20px] leading-5.5 lg:leading-8 font-light;
+  }
+  .p-md {
+    @apply font-[montserrat] text-[16px]  leading-5.5  font-light;
+  }
+  .p-light {
+    @apply font-[montserrat] text-[14px] leading-5.5  font-light;
+  }
+  .p-ultralight {
+    @apply font-[montserrat] text-[12px] leading-none font-normal;
+  }
+  .span-light {
+    @apply font-[montserrat] text-[12px];
+  }
+  .span-regular {
+    @apply font-[montserrat] text-[14px];
+  }
+  .gradient-one {
+    @apply from-[#5CE1E6] to-secondary;
+  }
+  .gradient-two {
+    @apply from-secondary to-[#050712];
+  }
+
+  .gradient-three {
+    @apply from-[#5CE1E65E] to-[#050712];
+  }
+  .gradient-four {
+    @apply from-[#32A6B3] to-[#0B5177];
+  }
+  .gradient-five {
+    @apply from-[#002C44] to-[#006EAA];
+  }
+  .gradient-six {
+    @apply from-[#8A38F5] to-primary;
+  }
+
+  .gradient-seven {
+    @apply bg-gradient-to-br from-[#050712] to-[#DEDB00];
+  }
+  .text-gradient {
+    @apply text-transparent bg-clip-text;
+  }
+  .custom-list li {
+    @apply text-[14px] leading-5.5 font-extralight;
+  }
+
+  .glass-drop {
+    @apply transition-transform duration-300 active:scale-95
+
+          bg-[#F0F0F04D]
+
+          backdrop-blur-xl
+
+          before:absolute before:inset-0 before:rounded-full 
+          before:border-t-[1.2px] before:border-white/50
+          before:content-['']
+
+          shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]
+
+          after:absolute after:inset-0 after:rounded-full 
+          after:border-b-[1.5px] after:border-white/50
+          after:content-[''];
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.glassBtn {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 8px;
+  background: transparent;
+  border-radius: 9999px;
+  outline: none;
+  border: none;
+  z-index: 0;
+}
+
+.glassBtn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: 9999px;
+  -webkit-box-shadow:
+    inset 2px 2px 0 -2px rgba(255, 255, 255, 0.7),
+    inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
+  box-shadow:
+    inset 2px 2px 0 -2px rgba(255, 255, 255, 0.7),
+    inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
+  background-color: rgb(255 255 255 / 10%);
+}
+
+.glassBtn::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: 9999px;
+  -webkit-backdrop-filter: blur(0px);
+  backdrop-filter: blur(0px);
+  -webkit-filter: url(#btn-glass);
+  filter: url(#btn-glass);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.gradient-insight-border {
+  position: relative;
+
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  background: transparent;
+
+  z-index: 1;
+}
+
+/* Use a pseudo-element for the border */
+.gradient-insight-border::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  padding: 1px; /* border thickness */
+  background: linear-gradient(180deg, #dedb00, #201f01);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude; /* For Firefox */
+  pointer-events: none;
+}
+.gradient-strategist {
+  border-radius: 30px;
+
+  background: transparent;
+}
+
+/* Use a pseudo-element for the border */
+.gradient-strategist::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 30px;
+  padding: 0.5px; /* border thickness */
+  background: linear-gradient(180deg, #636100, #082525);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude; /* For Firefox */
+  pointer-events: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.mask-squircle {
+  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 C20 0 0 20 0 50 C0 80 20 100 50 100 C80 100 100 80 100 50 C100 20 80 0 50 0 Z' fill='white'/%3E%3C/svg%3E");
+  mask-size: cover;
+}
+
+.squircle {
+  border-radius: 52px;
+  corner-shape: squircle;
+}
+
+/* 🦊 Firefox */
+@-moz-document url-prefix() {
+  .squircle {
+    border-radius: 30px;
+  }
+}
+
+/* 🍎 Safari */
+@supports (-webkit-touch-callout: none) {
+  .squircle {
+    border-radius: 30px;
+  }
+}
+
+/* shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.06) 25%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite linear;
+  border-radius: 30px;
+}

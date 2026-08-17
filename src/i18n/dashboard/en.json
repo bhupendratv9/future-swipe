@@ -1,0 +1,21 @@
+{
+"cards": {
+    "start": {
+      "title": "Start Swiping",
+      "desc": ""
+    },
+    "play": {
+      "title": "How to Play!",
+      "desc": "Swipe right on what you like, left on what you don’t. We’ll analyze your choices and match you with ideal degrees."
+    },
+    "profile": {
+      "title": "My Profile",
+      "desc": ""
+    },
+    "share": {
+      "title": "Share with a friend",
+      "desc": ""
+    }
+    
+}
+}

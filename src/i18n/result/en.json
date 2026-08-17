@@ -1,0 +1,47 @@
+{
+    "screen": {
+        "industry":{
+            "heading":"Recommended Industries"
+        },
+        "bestFitCard": {
+            "heading": "Best Fits for You",
+            "button": "Explore Degree",
+            "fees": "Fees"
+        },
+        "card": {
+            "shortText":"You Are",
+            "button": "View Insights"
+        },
+        "nextStep": {
+            "heading": "Take the next step",
+            "desc": "Seats fill fast. Don’t miss your match!",
+            "buttons": {
+                "play": "Play Again",
+                "result": {
+                    "save": "Save results",
+                    "remove": "Remove results"
+                },
+                "share": "Share with your friends"
+            }
+        }
+    },
+    "degree": {
+        "perfectText": "Why this is perfect for you",
+        "eligibility": "Eligibility",
+        "mode": "Mode",
+        "fees": "Fees",
+        "orderList": {
+            "1": "What you will learn",
+            "2": "Where this can take you"
+        },
+        "universityCard": {
+            "heading": "Universities offering this course",
+            "button": "Explore University"
+        }
+    },
+    "insight": {
+        "quoteHeading": "People like you",
+        "quote":"Your mindset aligns with",
+        "popupText": "Best Careers for {{name}}"
+    }
+}

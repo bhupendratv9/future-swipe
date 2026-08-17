@@ -1,0 +1,49 @@
+{
+  "heading": "My Profile",
+  "edit": "Edit Profile",
+  "menu": {
+    "insight": "Insights",
+    "result": {
+      "heading": "Save Results",
+      "button": "Explore",
+      "saved": "Saved",
+      "ago": "ago"
+    },
+    "universities": {
+      "like": "Liked Universities",
+      "empty": "You haven’t added any universities to your wishlist yet."
+    },
+    "help": {
+      "heading": "Help Centre",
+      "card": {
+        "title": "Need help?",
+        "subTitle": "We’re here to assist you"
+      },
+      "button": "Email Us",
+      "message": "We typically respond within 24 hours"
+    },
+    "delete": {
+      "heading": "Delete My Account",
+      "pageHeading": "Delete your account?",
+      "desc": "This will permanently remove your profile, saved results, and preferences.",
+      "button": {
+        "cancel": "cancel",
+        "delete": "Delete Account"
+      },
+      "account": {
+        "title": "Are you sure?",
+        "subTitle": "This action cannot be undone.",
+        "confirm": "Type DELETE to Confirm",
+        "button": {
+          "back": "Go Back",
+          "delete": "Yes, Delete"
+        }
+      },
+      "message": {
+        "text": "Your account has been deleted",
+        "button": "Exit App"
+      }
+    },
+    "logout": "Logout"
+  }
+}

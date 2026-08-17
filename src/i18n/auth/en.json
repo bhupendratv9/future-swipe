@@ -1,0 +1,43 @@
+{
+    "signin": {
+        "match": {
+            "title": "Your Career Match is Ready",
+            "subTitle": "Based on your answers, we’ve found something exciting for you!"
+        },
+        "badge": "Unlock your personalized result in just 1 step",
+        "google": "Continue with Google",
+        "guest": "Continue as a Guest"
+    },
+    "personalInfo": {
+        "edit":"Edit Profile",
+        "title": "Let’s get to know you",
+        "subTitle": "So we can find your perfect degree match",
+        "fields": {
+            "upload": {
+                "placeholder": "Upload profile image",
+                "change": "Change"
+            },
+            "name": {
+                "label": "Name",
+                "placeholder": "Enter your name"
+            },
+            "gender": {
+                "label": "Gender",
+                "type": {
+                    "male": "Male",
+                    "female": "Female"
+                }
+            },
+            "age": {
+                "label": "Age",
+                "placeholder": "Enter your age"
+            },
+            "qualification": {
+                "label": "Qualification",
+                "placeholder": "Select your current level"
+            }
+        },
+        "button": "Continue",
+        "message": "Login Successful"
+    }
+}
