@@ -36,6 +36,7 @@ import {useGetProfileQuery} from "@/queries/get-profile-query.ts";
 import {useQuery} from "@tanstack/react-query";
 import {getPageContent} from "@/api/services/get-page-content.ts";
 import {getAppLanguage} from "@/lib/getAppLanguage.ts";
+import { encryptRouterPath, isProfileIncomplete } from "@/lib/auth-redirect.ts";
 
 type routeType = {
   name: string;
@@ -202,19 +203,13 @@ function RouteComponent() {
 
           const user = res?.data?.user;
 
-          if (user) {
-            const isProfileIncomplete =
-              user?.age === null ||
-              user?.qualification === null ||
-              user?.gender === null;
-            if (isProfileIncomplete) {
-              router.navigate({
-                to: "/complete-profile",
-                search: { redirect: "/profile" },
-              });
-            } else {
-              router.navigate({ to: "/profile" });
-            }
+          if (isProfileIncomplete(user)) {
+            router.navigate({
+              to: "/complete-profile",
+              search: { redirect: encryptRouterPath("/profile") },
+            });
+          } else {
+            router.navigate({ to: "/profile" });
           }
 
           toast.success("Login successful");

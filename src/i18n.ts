@@ -24,7 +24,7 @@ import stepTwoEn from "@/i18n/step-two/en.json";
 import stepTwoHn from "@/i18n/step-two/hi.json";
 
 i18n
-  .use(LanguageDetector) // Automatically detects user language
+  .use(LanguageDetector) // localStorage first; otherwise Hindi (lng / html lang)
   .use(initReactI18next) // Passes i18n down to react-i18next
   .init({
     resources: {
@@ -53,11 +53,18 @@ i18n
         stepTwo: stepTwoHn,
       },
     },
-    lng: "en", // Default language
-    fallbackLng: "en", // Use English if Hindi translation is missing
+    lng: "hi",
+    fallbackLng: "en",
     supportedLngs: ["en", "hi"],
     nonExplicitSupportedLngs: true,
     load: "languageOnly",
+    detection: {
+      // First visit → Hindi. Saved toggle (EN/HI) still wins on later visits.
+      // Do not use navigator — English Chrome would override the Hindi default.
+      order: ["localStorage", "htmlTag"],
+      caches: ["localStorage"],
+      lookupLocalStorage: "i18nextLng",
+    },
     interpolation: {
       escapeValue: false, // React already escapes values to prevent XSS
     },

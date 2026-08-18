@@ -1,17 +1,17 @@
 import { createFileRoute, isRedirect, redirect } from "@tanstack/react-router";
 import { getProfile } from "@/api/services/get-profile.ts";
-import {encryptionUtils} from "@/lib/encryption.ts";
 import {queryClient} from "@/lib/queryClient.ts";
 import {getPageContent} from "@/api/services/get-page-content.ts";
 import {getAppLanguage} from "@/lib/getAppLanguage.ts";
+import { encryptRouterPath, isProfileIncomplete } from "@/lib/auth-redirect.ts";
 
 export const Route = createFileRoute("/(authenticated-routes)/_authenticated")({
-  beforeLoad: async () => {
+  beforeLoad: async ({ location }) => {
     try {
       // Check if user has a token first
       const token = localStorage.getItem("access_token");
       if (!token) {
-        const encryptedPathname = encryptionUtils.encrypt(location.pathname);
+        const encryptedPathname = encryptRouterPath(location.pathname);
         throw redirect({
           to: "/sign-in",
           search: { redirect: encryptedPathname },
@@ -32,18 +32,13 @@ export const Route = createFileRoute("/(authenticated-routes)/_authenticated")({
 
       if (location.pathname === "/sign-in") return;
 
-      const encryptedPathname = encryptionUtils.encrypt(location.pathname);
+      const encryptedPathname = encryptRouterPath(location.pathname);
 
       const user = profile?.user;
 
-      const isProfileIncomplete =
-        user.age === null ||
-        user.qualification === null ||
-        user.gender === null;
+      const isGuest = user?.is_guest === 1;
 
-      const isGuest = user.is_guest === 1;
-
-      if (!profile) {
+      if (!profile || !user) {
         throw redirect({
           to: "/sign-in",
           search: {
@@ -52,7 +47,7 @@ export const Route = createFileRoute("/(authenticated-routes)/_authenticated")({
         });
       }
 
-      if (!isGuest && isProfileIncomplete && location.pathname !== "/complete-profile") {
+      if (!isGuest && isProfileIncomplete(user) && location.pathname !== "/complete-profile") {
         throw redirect({
           to: "/complete-profile",
           search: { redirect: encryptedPathname },
@@ -77,7 +72,7 @@ export const Route = createFileRoute("/(authenticated-routes)/_authenticated")({
 
       if (location.pathname === "/sign-in") return;
 
-      const encryptedPathname = encryptionUtils.encrypt(location.pathname);
+      const encryptedPathname = encryptRouterPath(location.pathname);
 
       throw redirect({
         to: "/sign-in",

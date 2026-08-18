@@ -18,7 +18,7 @@ const MultiLanguage = () => {
     setOpen(false);
   };
 
-  const currentLang = i18n.resolvedLanguage || "en";
+  const currentLang = i18n.resolvedLanguage || "hi";
 
   // Close dropdown when clicking outside
   useEffect(() => {

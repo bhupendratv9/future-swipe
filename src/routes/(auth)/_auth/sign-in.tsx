@@ -16,7 +16,12 @@ import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 import { useGetProfileQuery } from "@/queries/get-profile-query.ts";
 import { queryClient } from "@/lib/queryClient.ts";
-import { encryptionUtils } from "@/lib/encryption.ts";
+import {
+  encryptRouterPath,
+  hardNavigateToAppPath,
+  isProfileIncomplete,
+  resolvePostAuthPath,
+} from "@/lib/auth-redirect.ts";
 import { useSwipeStore } from "@/store/swipeStore.ts";
 import {useQuery} from "@tanstack/react-query";
 import {getPageContent} from "@/api/services/get-page-content.ts";
@@ -50,8 +55,6 @@ function RouteComponent() {
   const redirect = search?.redirect;
 
   const { sessionId } = useSwipeStore();
-
-  const decryptedRedirect = encryptionUtils.decrypt(redirect as string);
 
   const { data: profile } = useGetProfileQuery();
 
@@ -88,23 +91,16 @@ function RouteComponent() {
           queryClient.refetchQueries({ queryKey: ["profile"] });
 
           const user = res?.data?.user;
+          const fallbackPath = sessionId ? "/result-unlock" : "/dashboard";
+          const targetPath = resolvePostAuthPath(redirect, fallbackPath);
 
-          if (user) {
-            const isProfileIncomplete =
-              user?.age === null ||
-              user?.qualification === null ||
-              user?.gender === null;
-
-            if (isProfileIncomplete) {
-              router.navigate({
-                to: "/complete-profile",
-                search: { redirect: redirect },
-              });
-            } else {
-              router.navigate({ to: decryptedRedirect });
-            }
+          if (isProfileIncomplete(user)) {
+            router.navigate({
+              to: "/complete-profile",
+              search: { redirect: encryptRouterPath(targetPath) },
+            });
           } else {
-            router.navigate({ to: decryptedRedirect });
+            hardNavigateToAppPath(targetPath);
           }
 
           toast.success("Login successful");
